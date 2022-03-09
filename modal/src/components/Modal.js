@@ -1,21 +1,49 @@
-import React, { useState } from "react";
-import ReactModal from "react-modal";
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
+import { CSSTransition } from "react-transition-group";
+import "./modal.css";
 
-ReactModal.setAppElement("#root");
+const Modal = props => {
+  const closeOnEscapeKeyDown = e => {
+    if ((e.charCode || e.keyCode) === 27) {
+      props.onClose();
+    }
+  };
 
-const Modal = ({ children, openButtonText }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    document.body.addEventListener("keydown", closeOnEscapeKeyDown);
+    return function cleanup() {
+      document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
+    };
+  }, []);
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-  return (
-    <>
-      <button onClick={openModal}>{openButtonText}</button>
-      <ReactModal isOpen={isOpen} onRequestClose={closeModal}>
-        <button onClick={closeModal}>Close</button>
-        <div>{children}</div>
-      </ReactModal>
-    </>
+  return ReactDOM.createPortal(
+    <CSSTransition
+      in={props.show}
+      unmountOnExit
+      timeout={{ enter: 0, exit: 300 }}
+    >
+      <div className="modal" onClick={props.onClose}>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div className="modal-header">
+            <h4 className="modal-title">{props.title}</h4>
+          </div>
+          <div className="modal-body">{props.children}
+          <p >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+            pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
+            hendrerit risus, sed porttitor quam.  
+            <a href="" onClick={props.onClose}>Close</a>
+          </p></div>
+          <div className="modal-footer">
+            <button onClick={props.onClose} className="button">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </CSSTransition>,
+    document.getElementById("root")
   );
 };
 

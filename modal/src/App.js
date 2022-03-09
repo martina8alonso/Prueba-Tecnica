@@ -1,27 +1,27 @@
-import React from "react";
-import Modal from "./components/Modal";
-import "./App.css";
+import logo from './logo.svg';
+import './App.css';
+import Modal from './components/modal';
+import { useState } from 'react';
 
-export default function App() {
+function App() {
+  const [show, setShow] = useState(false);
+
   return (
+    
     <div className="App">
-      <h1>Hello</h1>
-  
-      <Modal openButtonText="Sign up!">
-        <form>
-          <div>
-            <label for="email-input">Email:</label>
-            <input type="email" id="email-input" name="email" />
-          </div>
-          <div>
-            <label for="password-input">Password:</label>
-            <input type="password" id="password-input" name="password" />
-          </div>
-          <div> 
-            <button type= "button">Save</button>
-          </div>
-        </form>
-      </Modal>
+      <div>
+        <h2> Create Modal</h2>
+      </div>
+      <div>
+        <p>Modals are separate windows within an application, most often as a dialog box. 
+          They are a common user interface pattern for providing information or requiring confirmation.</p>
+      <button onClick={() => setShow(true)}>Show Modal</button>
+      <Modal title="My Modal"  onClose={() => setShow(false)} show={show}/>
+      <p> how React can be used to implement modals by passing props and functionality from one component to another.</p>
+      </div>
+     
     </div>
   );
 }
+
+export default App;
