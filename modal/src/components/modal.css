@@ -37,13 +37,23 @@
     transform: translateY(-200px);
   }
   
-  .modal-header,
+  .modal-header {
+    padding: 19px 17px 43px 16px;
+  }
   .modal-footer {
     padding: 10px;
   }
   
   .modal-title {
-    margin: 0;
+    margin:0;
+    position: absolute;
+       
+  }
+  h3 {
+    position: absolute;
+    left:450px;
+
+
   }
   
   .modal-body {
