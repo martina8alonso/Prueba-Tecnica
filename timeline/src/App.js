@@ -10,12 +10,13 @@ import Fastfood from '@material-ui/icons/Fastfood';
 import LaptopMac from '@material-ui/icons/LaptopMac';
 import Hotel from '@material-ui/icons/Hotel';
 import Repeat from '@material-ui/icons/Repeat';
-
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent'
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 
 
 export default function App() {
   return (
+    <div>
+      <h2 className='App-title'> Timeline component with React</h2>
     <Timeline position="alternate">
       <TimelineItem>
         <TimelineOppositeContent
@@ -109,11 +110,11 @@ export default function App() {
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }}>
+        <TimelineContent sx={{ py: '12px', px: 20 }}>
          9:00 am
         </TimelineContent>
       </TimelineItem>
     </Timeline>
+    </div>
   );
 }
-
